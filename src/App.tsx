@@ -1,12 +1,12 @@
 import React from 'react'
-import styles from './App.module.scss'
 import './styles/global.scss'
+import TypingTest from './components/TypingTest'
 
 function App() {
   return (
-    <div className={styles.app}>
-      app
-    </div>
+    <>
+      <TypingTest/>
+    </>
   )
 }
 
