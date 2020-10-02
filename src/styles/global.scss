@@ -1,0 +1,12 @@
+@import './main';
+
+html {
+  font-size: $base-font-size;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
