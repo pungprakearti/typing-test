@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import cx from 'classnames'
 import styles from './TypingTest.module.scss'
 
 const TypingTest = () => {
@@ -105,35 +106,50 @@ const TypingTest = () => {
     'part',
   ]
 
+  // State
+  const [curWord, setCurWord] = useState(0);
+
   // Shuffle array
   const shuffleText = (text: Array<string>) => {
-    let curLen = defText.length - 1
+    let currentLength = text.length - 1
+    let textToShuffle = text
     let shuffledText = []
+    let index = 0
 
-    while (curLen > 0) {
-      shuffledText.push(defText[Math.floor(Math.random() * curLen)])
-      curLen -= 1;
+    while (currentLength > 0) {
+      index = Math.floor(Math.random() * currentLength)
+      shuffledText.push(textToShuffle[index])
+      textToShuffle.splice(index, 1)
+      currentLength -= 1;
     }
 
   return shuffledText
+  }
+
+  const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
+    console.log(e.currentTarget.value)
   }
 
   const words = shuffleText(defText)
 
   return (
     <div className={styles.Wrap}>
-      <div className='container'>
-        {words.map((word, i) => {
-          return (
-            <div
-              className={styles.word}
-              key={i}
-            >
-              {word}
-            </div>
-          )
-        })}
-        <input />
+      <div className={cx(styles.Inner, 'container')}>
+        <div className={styles.Words}>
+          {words.map((word, i) => {
+            return (
+              <div
+                className={styles.Word}
+                key={i}
+              >
+                {word}
+              </div>
+            )
+          })}
+        </div>
+        <input
+          onChange={handleInput}
+        />
       </div>
     </div>
   )

@@ -3,3 +3,16 @@
 .Wrap {
   border: 1px solid red;
 }
+
+.Inner {
+  background-color: gray;
+}
+
+.Words {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Word {
+  margin-right: $spacing-tiny;
+}
