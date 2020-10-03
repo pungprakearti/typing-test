@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import cx from 'classnames'
 import styles from './TypingTest.module.scss'
 
@@ -106,9 +106,6 @@ const TypingTest = () => {
     'part',
   ]
 
-  // State
-  const [curWord, setCurWord] = useState(0);
-
   // Shuffle array
   const shuffleText = (text: Array<string>) => {
     let currentLength = text.length - 1
@@ -126,17 +123,30 @@ const TypingTest = () => {
   return shuffledText
   }
 
+  const wordList = shuffleText(defText)
+  let curWordIndex = 0
+  let curWord = wordList[curWordIndex]
+  /*
+  - Need to keep track of wrong words for visual
+
+  - Just keep track of stats for WPM calculations
+  */
+
   const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value)
+    console.log(e.currentTarget.value, curWord)
+    /*
+    check if the word is correct for each letter and
+    if space then set correct or not and go to next word 
+    */
   }
 
-  const words = shuffleText(defText)
+  
 
   return (
     <div className={styles.Wrap}>
       <div className={cx(styles.Inner, 'container')}>
         <div className={styles.Words}>
-          {words.map((word, i) => {
+          {wordList.map((word, i) => {
             return (
               <div
                 className={styles.Word}
